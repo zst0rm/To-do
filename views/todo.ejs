@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="todo-list.js"></script>
+        <link href="/assets/todo.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <!-- Header -->
+        <div class="header">
+        <h1 class="title">TaskFlow</h1> <!-- App title -->
+        </div>
+        <p class="subtitle">Stay organized and boost your productivity</p>
+        <p class="subtitle">A simple and intuitive to-do list app to help you manage your tasks efficiently.</p>
+
+      <!-- Main Card -->
+      <div class="main-card">
+        <form id="todo-form">
+        <!-- Add Task Section -->
+          <div class="add-task">
+            <input type="text" class="task-input" name ="title" id="title" placeholder="Add a new task..." required>
+            <input type="text" class="task-input" name="description" id="description" placeholder="Add a description (optional)">
+            <input type="date" class="task-input" name="date" id="date" placeholder="Select a date (optional)">
+            <button class="add-btn" type="submit">Add Task</button>
+          </div>
+        </form>
+
+        
+        <!-- Task List -->
+        <% if (todos.length > 0) { %>
+        <div class="task">
+          <div class="task-item">
+            <div class="task-list"> 
+              <ul>
+                <% for(var i = 0 ; i<todos.length; i++){ %>
+                  <div class="task-card">
+                    <li class="task-text"><strong>Task:</strong> &nbsp;&nbsp; <%= todos[i].title %></li>
+      
+                    <% if (todos[i].description) { %>
+                      <li class="task-text"><strong>Description:</strong> &nbsp;&nbsp;<%= todos[i].description %></li>
+                    <% } %>
+      
+                    
+                    <li class="task-text"><strong>Date:</strong> &nbsp;&nbsp;<%= new Date(todos[i].date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) %></li>
+
+                    <li><button class="delete-btn" data-id="<%= todos[i]._id %>">❌</button></li>
+                  </div>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <% } else { %>
+          <p class="no-tasks">No tasks available. Add a new task to get started!</p>
+        <% } %>
+    </body>
+</html>
